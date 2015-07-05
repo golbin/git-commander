@@ -1,0 +1,28 @@
+{
+  "name": "git-commander",
+  "version": "0.1.0",
+  "description": "A git tool with a easy terminal interface.",
+  "author": "Jin Kim",
+  "license": "MIT",
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/golbin/git-commander.git"
+  }, 
+  "homepage": "https://github.com/golbin/git-commander",
+  "bugs": {
+    "url": "https://github.com/golbin/git-commander/issues"
+  },
+  "dependencies": {
+    "blessed": ""
+  },
+  "devDependencies": {
+  },
+  "main": "index.js",
+  "bin": {
+    "file-walker-server": "./server/index.js"
+  },
+  "keywords": [
+    "git",
+    "terminal"
+  ]
+}
