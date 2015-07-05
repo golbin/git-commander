@@ -1,0 +1,141 @@
+{
+    "screen": {
+        "autoPadding": false,
+        "fullUnicode": true,
+        "ignoreLocked": [
+            "escape"
+        ]
+    },
+    "title": {
+        "staged": {
+            "top": "top",
+            "left": "left",
+            "width": "50%",
+            "height": 3,
+            "align": "center",
+            "content": "Staged Files",
+            "tags": true,
+            "border": {
+                "type": "none"
+            },
+            "style": {
+                "fg": "green"
+            }
+        },
+        "unstaged": {
+            "top": "top",
+            "left": "50%",
+            "width": "50%",
+            "height": 3,
+            "align": "center",
+            "content": "Not Staged Files",
+            "tags": true,
+            "border": {
+                "type": "none"
+            },
+            "style": {
+                "fg": "red"
+            }
+        }
+    },
+    "list": {
+        "staged": {
+            "top": "top+2",
+            "left": "left",
+            "data": null,
+            "border": "line",
+            "align": "left",
+            "tags": true,
+            "width": "50%",
+            "height": "100%-5",
+            "interactive": false,
+            "vi": true,
+            "keys": true,
+            "style": {
+                "border": {
+                    "fg": "green"
+                },
+                "selected": {
+                    "bg": "blue"
+                }
+            }
+        },
+        "unstaged": {
+            "top": "top+2",
+            "left": "50%",
+            "data": null,
+            "border": "line",
+            "align": "left",
+            "tags": true,
+            "width": "50%",
+            "height": "100%-5",
+            "interactive": true,
+            "vi": true,
+            "keys": true,
+            "style": {
+                "border": {
+                    "fg": "red"
+                },
+                "selected": {
+                    "bg": "blue"
+                }
+            }
+        }
+    },
+    "menubar": {
+        "align": "center",
+        "bottom": 0,
+        "height": 3,
+        "mouse": true,
+        "autoCommandKeys": true,
+        "border": "line",
+        "vi": true,
+        "keys": true,
+        "style": {
+            "item": {},
+            "selected": {}
+        },
+        "commands": {
+            "SELECT": {
+                "keys": [
+                    "SPC"
+                ]
+            },
+            "ALL": {
+                "keys": [
+                    "ENTER"
+                ]
+            },
+            "ADD ": {
+                "keys": [
+                    "C-a"
+                ]
+            },
+            "RESET": {
+                "keys": [
+                    "C-r"
+                ]
+            },
+            "COMMIT": {
+                "keys": [
+                    "C-c"
+                ]
+            },
+            "PUSH": {
+                "keys": [
+                    "C-p"
+                ]
+            }
+        }
+    },
+    "loading": {
+        "top": "center",
+        "left": "center",
+        "height": 5,
+        "align": "center",
+        "width": "50%",
+        "tags": true,
+        "hidden": true,
+        "border": "line"
+    }
+}
