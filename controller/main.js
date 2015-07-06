@@ -25,6 +25,11 @@ var main = {
     mainView.screen.render();
   },
 
+  next: function (list) {
+    list.move(1);
+    mainView.screen.render();
+  },
+
   // TODO: Fix crash if there is no item
   toggle: function (type, list) {
     var selected = git.isSelected(type, list.selected);
@@ -92,6 +97,7 @@ mainView.screen.key(['right'], function () {
 
 mainView.list.staged.key(['space'], function () {
   main.toggle('staged', this);
+  main.next(this);
 });
 
 mainView.list.staged.key(['enter'], function () {
@@ -100,6 +106,7 @@ mainView.list.staged.key(['enter'], function () {
 
 mainView.list.unstaged.key(['space'], function () {
   main.toggle('unstaged', this);
+  main.next(this);
 });
 
 mainView.list.unstaged.key(['enter'], function () {
