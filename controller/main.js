@@ -1,5 +1,5 @@
-var Git      = require('./model/git'),
-    mainView = require('./view/main');
+var Git      = require('../model/git'),
+    mainView = require('../view/main');
 
 // model control
 var git = new Git(__dirname);
@@ -89,9 +89,6 @@ var reload = function () {
   mainView.loading.stop();
 };
 
-reload();
-exports.reload = reload
-
 // git commands
 mainView.screen.key(['C-a'], function () {
   mainView.loading.load('excuting...');
@@ -116,3 +113,6 @@ mainView.screen.key(['C-c'], function () {
 mainView.screen.key(['C-p'], function () {
   return process.exit(0);
 });
+
+exports.reload = reload
+

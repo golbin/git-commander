@@ -19,7 +19,7 @@
     },
     "devDependencies": {
     },
-    "main": "index.js",
+    "main": "controller/main.js",
     "bin": {
         "git-commander": "./bin/git-commander"
     },
