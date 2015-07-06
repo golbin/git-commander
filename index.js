@@ -33,6 +33,7 @@ mainView.screen.key(['right'], function () {
   moveToUnstaged();
 });
 
+// TODO: Fix crash if there is no item
 var toggle = function (type, list) {
   var selected = git.isSelected(type, list.selected);
 
@@ -79,19 +80,13 @@ mainView.list.unstaged.key(['enter'], function () {
 
 // initialize
 var reload = function () {
-  git.status()
-    .then(function (result) {
-      mainView.setItems(git);
-      moveToUnstaged(0);
-    })
-    .fail(function (err) {
-      // TODO: show alert box
-      console.log(err);
-      process.exit(1);
-    })
-    .done(function () {
-      mainView.loading.stop();
-    });
+  git.status();
+
+  mainView.setItems(git);
+
+  moveToUnstaged(0);
+
+  mainView.loading.stop();
 };
 
 reload();
@@ -100,23 +95,17 @@ reload();
 mainView.screen.key(['C-a'], function () {
   mainView.loading.load('excuting...');
 
-  git.add()
-    .fail(function (err) {
-      // TODO: show alert box
-      console.log(err);
-    })
-    .done(reload);
+  git.add();
+
+  reload();
 });
 
 mainView.screen.key(['C-r'], function () {
   mainView.loading.load('excuting...');
 
-  git.reset()
-    .fail(function (err) {
-      // TODO: show alert box
-      console.log(err);
-    })
-    .done(reload);
+  git.reset();
+
+  reload();
 });
 
 mainView.screen.key(['C-c'], function () {

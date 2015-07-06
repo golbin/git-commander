@@ -54,12 +54,12 @@ var setItems = function (git) {
   list.unstaged.setItems(buildItemListByType(git, 'unstaged'));
 };
 
-var mark = function (markAll) {
+var mark = function () {
   var content = this.getItem(this.selected).content;
   this.setItem(this.selected, " * " + content.substr(3));
 };
 
-var unmark = function (unmarkAll) {
+var unmark = function () {
   var content = this.getItem(this.selected).content;
   this.setItem(this.selected, "   " + content.substr(3));
 };

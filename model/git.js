@@ -69,17 +69,9 @@ Git.prototype.status = function () {
 
   this.clear();
 
-  var deferred = Q.defer();
+  var stdout = process.execSync('git status -su');
 
-  process.exec('git status -su', function (err, stdout, stderr) {
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve(self.convertStatus(stdout));
-    }
-  });
-
-  return deferred.promise;
+  return self.convertStatus(stdout.toString());
 };
 
 Git.prototype.isSelected = function (type, index) {
@@ -125,20 +117,13 @@ Git.prototype.selectedFiles = function (type) {
 };
 
 Git.prototype.commandWithFiles = function (command, type) {
-  var files    = this.selectedFiles(type),
-      deferred = Q.defer();
+  var files = this.selectedFiles(type);
 
   var gitCommand = gitExec + ' ' + command + ' ' + files;
 
-  process.exec(gitCommand, function (err, stdout, stderr) {
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve(stdout);
-    }
-  });
+  var stdout = process.execSync(gitCommand);
 
-  return deferred.promise;
+  return stdout.toString();
 };
 
 Git.prototype.add = function () {
