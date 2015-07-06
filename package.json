@@ -14,8 +14,7 @@
     },
     "dependencies": {
         "blessed": "",
-        "lodash": "",
-        "q": ""
+        "lodash": ""
     },
     "devDependencies": {
     },

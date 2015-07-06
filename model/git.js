@@ -1,5 +1,4 @@
 var _       = require('lodash'),
-    Q       = require('q'),
     process = require('child_process');
 
 // TODO: get git command from shell
@@ -7,7 +6,6 @@ var gitExec = 'git';
 
 function Git (path) {
   this.path = path;
-  this.repo = null;
 }
 
 Git.prototype.clear = function () {
