@@ -1,10 +1,11 @@
 var _       = require('lodash'),
     blessed = require('blessed'),
-    styles  = require('./styles.json');
+    styles  = require('./style/main.json');
 
 // build layout
 var screen = blessed.screen(styles.screen);
 
+// bind screen to child elems
 _.merge(styles, {
   title  : {
     staged  : {parent: screen},

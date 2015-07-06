@@ -102,6 +102,10 @@ Git.prototype.deselect = function (type, index) {
   }
 };
 
+Git.prototype.getStagedFiles = function () {
+  return this.files.staged;
+};
+
 Git.prototype.selectedFiles = function (type) {
   var selectedFiles = [];
 
@@ -129,7 +133,17 @@ Git.prototype.add = function () {
 };
 
 Git.prototype.reset = function () {
-  return this.commandWithFiles('reset', 'staged');
+  return this.commandWithFiles('reset --', 'staged');
+};
+
+Git.prototype.commit = function (message) {
+  message.replace('"', '\\"');
+
+  var gitCommand = gitExec + ' commit -m "' + message + '"';
+
+  var stdout = process.execSync(gitCommand);
+
+  return stdout;
 };
 
 module.exports = Git;
