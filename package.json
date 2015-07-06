@@ -1,29 +1,34 @@
 {
-    "name": "git-commander",
-    "version": "0.0.1",
-    "description": "A git tool with a easy terminal interface.",
-    "author": "Jin Kim",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/golbin/git-commander.git"
-    },
-    "homepage": "https://github.com/golbin/git-commander",
-    "bugs": {
-        "url": "https://github.com/golbin/git-commander/issues"
-    },
-    "dependencies": {
-        "blessed": "",
-        "lodash": ""
-    },
-    "devDependencies": {
-    },
-    "main": "controller/main.js",
-    "bin": {
-        "git-commander": "./bin/git-commander"
-    },
-    "keywords": [
-        "git",
-        "terminal"
-    ]
+  "name": "git-commander",
+  "version": "0.0.1",
+  "description": "A git tool with a easy terminal interface.",
+  "author": "Jin Kim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/golbin/git-commander.git"
+  },
+  "homepage": "https://github.com/golbin/git-commander",
+  "bugs": {
+    "url": "https://github.com/golbin/git-commander/issues"
+  },
+  "dependencies": {
+    "blessed": "",
+    "lodash": ""
+  },
+  "devDependencies": {},
+  "main": "controller/main.js",
+  "bin": {
+    "git-commander": "./bin/git-commander"
+  },
+  "keywords": [
+    "git",
+    "terminal"
+  ],
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
