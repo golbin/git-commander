@@ -21,7 +21,7 @@
     },
     "main": "index.js",
     "bin": {
-        "file-walker-server": "./server/index.js"
+        "git-commander": "./bin/git-commander"
     },
     "keywords": [
         "git",

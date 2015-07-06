@@ -90,6 +90,7 @@ var reload = function () {
 };
 
 reload();
+exports.reload = reload
 
 // git commands
 mainView.screen.key(['C-a'], function () {
