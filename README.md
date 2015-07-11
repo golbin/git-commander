@@ -12,7 +12,9 @@ A git tool with a easy terminal interface.
 - [x] git commit [files]
 - [x] git log
 - [x] git reset <commit>
-- [ ] git diff [<file>]
+- [x] git diff file
+- [ ] git branch
+- [ ] git push
 
 # Install & Usage
 
