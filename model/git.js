@@ -1,5 +1,5 @@
-var _       = require('lodash'),
-    process = require('child_process');
+var _        = require('lodash'),
+    execSync = require('child_process').execSync;
 
 // TODO: get git command from shell
 var gitExec = 'git';
@@ -67,7 +67,7 @@ Git.prototype.status = function () {
 
   this.clear();
 
-  var stdout = process.execSync('git status -su');
+  var stdout = execSync('git status -su');
 
   return self.convertStatus(stdout.toString());
 };
@@ -123,7 +123,7 @@ Git.prototype.commandWithFiles = function (command, type) {
 
   var gitCommand = gitExec + ' ' + command + ' ' + files;
 
-  var stdout = process.execSync(gitCommand);
+  var stdout = execSync(gitCommand);
 
   return stdout.toString();
 };
@@ -141,9 +141,63 @@ Git.prototype.commit = function (message) {
 
   var gitCommand = gitExec + ' commit -m "' + message + '"';
 
-  var stdout = process.execSync(gitCommand);
+  var stdout = execSync(gitCommand);
 
-  return stdout;
+  return stdout.toString();
+};
+
+var isNotEmpty = function (value) {
+  return !_.isEmpty(value);
+};
+
+var parseLogContent = function (logs, line) {
+  if (line.slice(0, 6) === 'commit') {
+    logs.push({
+      id: line.slice(7)
+    });
+  } else if (line.slice(0, 6) === 'Author') {
+    var emailIndex = line.indexOf('<');
+
+    if (emailIndex > 0) {
+      _.last(logs).author = {
+        name : line.slice(8, emailIndex - 1),
+        email: line.slice(emailIndex + 1, -1)
+      }
+    } else {
+      _.last(logs).author = {
+        name: line
+      }
+    }
+  } else if (line.slice(0, 4) === 'Date') {
+    _.last(logs).date = new Date(line.slice(5));
+  } else {
+    if (!_.last(logs).messages) {
+      _.last(logs).messages = [line];
+    } else {
+      _.last(logs).messages.push(line);
+    }
+  }
+
+  return logs;
+};
+
+Git.prototype.log = function () {
+  var gitCommand = gitExec + ' log';
+
+  var stdout = execSync(gitCommand);
+
+  return _(stdout.toString().split('\n'))
+    .filter(isNotEmpty)
+    .map(_.trim)
+    .reduce(parseLogContent, []);
+};
+
+Git.prototype.resetCommit = function (commitId) {
+  var gitCommand = gitExec + ' reset ' + commitId;
+
+  var stdout = execSync(gitCommand);
+
+  return stdout.toString();
 };
 
 module.exports = Git;

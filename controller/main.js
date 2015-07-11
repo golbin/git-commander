@@ -1,144 +1,185 @@
-var Git      = require('../model/git'),
-    mainView = require('../view/main');
+var _ = require('lodash');
 
-var editor = require('./editor');
+var Git  = require('../model/git'),
+    view = require('../view/main');
+
+var editor = require('./editor'),
+    log    = require('./log');
 
 // model control
 var git = new Git(__dirname);
 
 var main = {
-  screen: mainView.screen,
+  git   : git,
+  screen: view.screen,
 
   moveToStaged: function (index) {
-    mainView.list.staged.interactive   = true;
-    mainView.list.unstaged.interactive = false;
-    mainView.list.staged.select(index !== undefined ? index : mainView.list.unstaged.selected);
-    mainView.list.staged.focus();
-    mainView.screen.render();
+    view.list.staged.interactive   = true;
+    view.list.unstaged.interactive = false;
+    view.list.staged.select(index !== undefined ? index : view.list.unstaged.selected);
+    view.list.staged.focus();
+    view.screen.render();
   },
 
   moveToUnstaged: function (index) {
-    mainView.list.staged.interactive   = false;
-    mainView.list.unstaged.interactive = true;
-    mainView.list.unstaged.select(index !== undefined ? index : mainView.list.staged.selected);
-    mainView.list.unstaged.focus();
-    mainView.screen.render();
+    view.list.staged.interactive   = false;
+    view.list.unstaged.interactive = true;
+    view.list.unstaged.select(index !== undefined ? index : view.list.staged.selected);
+    view.list.unstaged.focus();
+    view.screen.render();
   },
 
-  next: function (list) {
-    list.move(1);
-    mainView.screen.render();
+  next: function () {
+    this.move(1);
+    view.screen.render();
   },
 
   // TODO: Fix crash if there is no item
-  toggle: function (type, list) {
-    var selected = git.isSelected(type, list.selected);
+  toggle: function () {
+    var selected = git.isSelected(this.name, this.selected);
 
     if (selected) {
-      git.deselect(type, list.selected);
-      list.unmark();
+      git.deselect(this.name, this.selected);
+      main.unmark.call(this);
     } else {
-      git.select(type, list.selected);
-      list.mark();
+      git.select(this.name, this.selected);
+      main.mark.call(this);
     }
 
-    mainView.screen.render();
+    view.screen.render();
   },
 
-  selectAll: function (type) {
+  selectAll: function () {
+    var type = view.list.staged.focused ? view.list.staged.name : view.list.unstaged.name;
+
     var selected = git.isSelected(type);
 
     if (selected) {
       git.deselect(type);
-      mainView.setItems(git);
+      main.setItems(git);
     } else {
       git.select(type);
-      mainView.setItems(git);
+      main.setItems(git);
     }
 
-    mainView.screen.render();
+    view.screen.render();
+  },
+
+  lockScreen: function () {
+    main.prevFocused = view.screen.focused;
+  },
+
+  unlockScreen: function () {
+    if (main.prevFocused) {
+      main.prevFocused.focus();
+    }
+  },
+
+  show: function (controller) {
+    if (controller) {
+      main.lockScreen();
+      controller.show();
+    } else {
+      main.reload();
+      main.unlockScreen();
+      view.screen.render();
+    }
   },
 
   // initialize
   reload: function () {
     git.status();
 
-    mainView.setItems(git);
+    main.setItems();
 
     main.moveToUnstaged(0);
 
-    mainView.loading.stop();
+    view.loading.stop();
   },
 
-  commit: function (message) {
-    // TODO: Check other exceptions
+  // utility functions
+  formatItem: function (selected, symbol, file) {
+    var prefix = selected ? " * " : "   ";
+    return prefix + symbol + " " + file;
+  },
 
-    git.commit(message);
+  buildItemListByType: function (type) {
+    return _.reduce(git.files[type], function (result, val, index) {
+      result.push(main.formatItem(git.selected[type][index], git.symbols[type][index], val));
+      return result;
+    }, []);
+  },
 
-    main.reload();
+  setItems: function () {
+    view.list.staged.setItems(main.buildItemListByType('staged'));
+    view.list.unstaged.setItems(main.buildItemListByType('unstaged'));
+  },
+
+  mark: function () {
+    var content = this.getItem(this.selected).content;
+    this.setItem(this.selected, " * " + content.substr(3));
+  },
+
+  unmark: function () {
+    var content = this.getItem(this.selected).content;
+    this.setItem(this.selected, "   " + content.substr(3));
   }
 };
 
 // bind editor
 editor.init(main);
 
-// event binding
-mainView.screen.key(['escape'], function () {
-  return process.exit(0);
+// bind log viewer
+log.init(main);
+
+// bind keys
+// TODO: Need to refactor
+_.each(view.list, function (elem) {
+  elem.key(['space'], function () {
+    main.toggle.call(this);
+    main.next.call(this);
+  });
+
+  elem.key(['enter'], function () {
+    main.selectAll();
+  });
+
+  elem.key(['escape', 'q'], function () {
+    return process.exit(0);
+  });
+
+  // git commands
+  elem.key(['C-a'], function () {
+    git.add();
+    main.reload();
+  });
+
+  elem.key(['C-r'], function () {
+    git.reset();
+    main.reload();
+  });
+
+  elem.key(['C-c'], function () {
+    if (git.getStagedFiles().length < 1) {
+      // TODO: alert
+      return;
+    }
+
+    main.show(editor);
+  });
+
+  elem.key(['C-l'], function () {
+    main.show(log);
+  });
+
+  elem.key(['left'], function () {
+    main.moveToStaged();
+  });
+
+  elem.key(['right'], function () {
+    main.moveToUnstaged();
+  });
 });
-
-mainView.screen.key(['left'], function () {
-  main.moveToStaged();
-});
-
-mainView.screen.key(['right'], function () {
-  main.moveToUnstaged();
-});
-
-mainView.list.staged.key(['space'], function () {
-  main.toggle('staged', this);
-  main.next(this);
-});
-
-mainView.list.staged.key(['enter'], function () {
-  main.selectAll('staged', this);
-});
-
-mainView.list.unstaged.key(['space'], function () {
-  main.toggle('unstaged', this);
-  main.next(this);
-});
-
-mainView.list.unstaged.key(['enter'], function () {
-  main.selectAll('unstaged', this);
-});
-
-// git commands
-mainView.screen.key(['C-a'], function () {
-  git.add();
-
-  main.reload();
-});
-
-mainView.screen.key(['C-r'], function () {
-  git.reset();
-
-  main.reload();
-});
-
-mainView.screen.key(['C-c'], function () {
-  if (git.getStagedFiles().length < 1) {
-    // TODO: alert
-    return;
-  }
-
-  editor.show();
-});
-
-mainView.screen.key(['C-p'], function () {
-  // Push
-});
-
 
 module.exports = main;
 

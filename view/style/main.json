@@ -1,10 +1,7 @@
 {
     "screen": {
         "autoPadding": false,
-        "fullUnicode": true,
-        "ignoreLocked": [
-            "escape"
-        ]
+        "fullUnicode": true
     },
     "title": {
         "staged": {
@@ -121,9 +118,9 @@
                     "C-c"
                 ]
             },
-            "PUSH": {
+            "LOG": {
                 "keys": [
-                    "C-p"
+                    "C-l"
                 ]
             }
         }

@@ -1,31 +1,31 @@
-var editorView = require('../view/editor');
+var EditorView = require('../view/editor');
 
-var parent      = null,
-    prevFocused = null;
+var parent = null,
+    view   = null;
 
 var editor = {
   show: function () {
-    prevFocused = parent.focused;
-    editorView.show();
-    parent.render();
+    view.layout.show();
+    view.textarea.focus();
+    view.textarea.readInput();
+    view.layout.parent.render();
   },
 
   hide: function () {
-    editorView.hide();
-    editorView.clear();
-    prevFocused.focus();
-    parent.render();
+    view.layout.hide();
+    view.textarea.clearValue();
+    parent.show();
   },
 
   init: function (delegate) {
-    parent = delegate.screen;
+    parent = delegate;
 
-    var view = editorView.init(parent);
+    view = EditorView(parent.screen);
 
     view.textarea.key(['C-s'], function () {
       var message = view.textarea.getValue();
 
-      delegate.commit(message);
+      parent.git.commit(message);
 
       editor.hide();
     });

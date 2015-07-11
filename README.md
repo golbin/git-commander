@@ -10,8 +10,8 @@ A git tool with a easy terminal interface.
 - [x] git add [files]
 - [x] git rest -- [files]
 - [x] git commit [files]
-- [ ] git log
-- [ ] git reset <commit>
+- [x] git log
+- [x] git reset <commit>
 - [ ] git diff [<file>]
 
 # Install & Usage
