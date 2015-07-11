@@ -77,10 +77,10 @@ var log = {
     view.list.setItems(logItems);
   },
 
-  hide: function () {
+  hide: function (reload) {
     view.layout.hide();
     log.clear();
-    parent.show();
+    parent.show(reload);
   },
 
   init: function (delegate) {
@@ -95,14 +95,14 @@ var log = {
         if (value === true) {
           parent.git.resetCommit(item.id);
 
-          log.hide();
+          log.hide(true);
         } else {
           parent.screen.render();
         }
       });
     });
 
-    view.list.key(['escape'], function () {
+    view.list.key(['escape', 'q'], function () {
       log.hide();
     });
 

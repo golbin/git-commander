@@ -200,4 +200,12 @@ Git.prototype.resetCommit = function (commitId) {
   return stdout.toString();
 };
 
+Git.prototype.diff = function (type, index) {
+  var gitCommand = gitExec + ' diff "' + this.files[type][index] + '"';
+
+  var stdout = execSync(gitCommand);
+
+  return stdout.toString();
+};
+
 module.exports = Git;

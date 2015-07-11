@@ -98,6 +98,8 @@ var main = {
     main.moveToUnstaged(0);
 
     view.loading.stop();
+
+    view.screen.render();
   },
 
   // utility functions

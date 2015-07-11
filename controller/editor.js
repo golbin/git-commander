@@ -11,10 +11,10 @@ var editor = {
     view.layout.parent.render();
   },
 
-  hide: function () {
+  hide: function (reload) {
     view.layout.hide();
     view.textarea.clearValue();
-    parent.show();
+    parent.show(reload);
   },
 
   init: function (delegate) {
@@ -27,7 +27,7 @@ var editor = {
 
       parent.git.commit(message);
 
-      editor.hide();
+      editor.hide(true);
     });
 
     view.textarea.key(['escape'], function () {
