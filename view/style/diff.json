@@ -1,0 +1,62 @@
+{
+    "layout": {
+        "hidden": true,
+        "top": "center",
+        "left": "center",
+        "width": "100%",
+        "height": "100%"
+    },
+    "textarea": {
+        "top": "top",
+        "left": "left",
+        "width": "100%",
+        "height": "100%-3",
+        "border": "line",
+        "mouse": true,
+        "vi": true,
+        "keys": true,
+        "padding": {
+            "left": 1,
+            "right": 1
+        },
+        "scrollbar": {
+            "ch": " "
+        },
+        "style": {
+            "scrollbar": {
+                "inverse": true
+            }
+        }
+    },
+    "menubar": {
+        "align": "center",
+        "bottom": 0,
+        "width": "100%",
+        "height": 3,
+        "mouse": true,
+        "border": "line",
+        "vi": true,
+        "keys": true,
+        "style": {
+            "item": {},
+            "selected": {}
+        },
+        "commands": {
+            "EXIT": {
+                "keys": [
+                    "ESC"
+                ]
+            },
+            "PAGE DOWN": {
+                "keys": [
+                    "C-f"
+                ]
+            },
+            "PAGE UP": {
+                "keys": [
+                    "C-b"
+                ]
+            }
+        }
+    }
+}

@@ -46,7 +46,6 @@
             "width": "50%",
             "height": "100%-5",
             "interactive": false,
-            "vi": true,
             "keys": true,
             "style": {
                 "border": {
@@ -67,7 +66,6 @@
             "width": "50%",
             "height": "100%-5",
             "interactive": true,
-            "vi": true,
             "keys": true,
             "style": {
                 "border": {
@@ -79,13 +77,11 @@
             }
         }
     },
-    "menubar": {
+    "menubar1": {
         "align": "center",
         "bottom": 0,
         "height": 3,
         "mouse": true,
-        "autoCommandKeys": true,
-        "border": "line",
         "vi": true,
         "keys": true,
         "style": {
@@ -98,12 +94,7 @@
                     "SPC"
                 ]
             },
-            "ALL": {
-                "keys": [
-                    "ENTER"
-                ]
-            },
-            "ADD ": {
+            "ADD": {
                 "keys": [
                     "C-a"
                 ]
@@ -117,10 +108,34 @@
                 "keys": [
                     "C-c"
                 ]
+            }
+        }
+    },
+    "menubar2": {
+        "align": "center",
+        "bottom": 0,
+        "height": 2,
+        "mouse": true,
+        "vi": true,
+        "keys": true,
+        "style": {
+            "item": {},
+            "selected": {}
+        },
+        "commands": {
+            "ALL ": {
+                "keys": [
+                    "ENTER"
+                ]
             },
             "LOG": {
                 "keys": [
                     "C-l"
+                ]
+            },
+            "DIFF": {
+                "keys": [
+                    "C-d"
                 ]
             }
         }

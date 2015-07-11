@@ -4,7 +4,8 @@ var Git  = require('../model/git'),
     view = require('../view/main');
 
 var editor = require('./editor'),
-    log    = require('./log');
+    log    = require('./log'),
+    diff   = require('./diff');
 
 // model control
 var git = new Git(__dirname);
@@ -76,11 +77,13 @@ var main = {
   },
 
   show: function (controller) {
-    if (controller) {
+    if (_.isBoolean(controller) && controller === true) {
+      main.reload();
+      view.screen.render();
+    } else if (_.isObject(controller)) {
       main.lockScreen();
       controller.show();
     } else {
-      main.reload();
       main.unlockScreen();
       view.screen.render();
     }
@@ -132,6 +135,9 @@ editor.init(main);
 // bind log viewer
 log.init(main);
 
+// bind diff viewer
+diff.init(main);
+
 // bind keys
 // TODO: Need to refactor
 _.each(view.list, function (elem) {
@@ -170,6 +176,12 @@ _.each(view.list, function (elem) {
 
   elem.key(['C-l'], function () {
     main.show(log);
+  });
+
+  //elem.unkey(['C-d']);
+
+  elem.key(['C-d'], function () {
+    main.show(diff);
   });
 
   elem.key(['left'], function () {
