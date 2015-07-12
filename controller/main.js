@@ -121,11 +121,21 @@ var main = {
   },
 
   mark: function () {
-    var content = this.getItem(this.selected).content;
+    var selectedItem = this.getItem(this.selected);
+    if (selectedItem === undefined) {
+      return;
+    }
+
+    var content = selectedItem.content;
     this.setItem(this.selected, " * " + content.substr(3));
   },
 
   unmark: function () {
+    var selectedItem = this.getItem(this.selected);
+    if (selectedItem === undefined) {
+      return;
+    }
+
     var content = this.getItem(this.selected).content;
     this.setItem(this.selected, "   " + content.substr(3));
   }
