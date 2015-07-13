@@ -1,6 +1,6 @@
 {
   "name": "git-commander",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A git tool with a easy terminal interface.",
   "author": "Jin Kim",
   "license": "MIT",
