@@ -13,7 +13,7 @@
     "url": "https://github.com/golbin/git-commander/issues"
   },
   "dependencies": {
-    "blessed": "^1.7",
+    "blessed": "^0.1.7",
     "lodash": "^3"
   },
   "devDependencies": {},
