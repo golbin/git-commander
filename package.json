@@ -13,10 +13,13 @@
     "url": "https://github.com/golbin/git-commander/issues"
   },
   "dependencies": {
-    "blessed": "",
-    "lodash": ""
+    "blessed": "^1.7",
+    "lodash": "^3"
   },
   "devDependencies": {},
+  "engines": {
+    "node": "^0.12"
+  },
   "main": "controller/main.js",
   "bin": {
     "git-commander": "./bin/git-commander"
