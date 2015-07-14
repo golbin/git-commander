@@ -8,7 +8,7 @@ A git tool with a easy terminal interface.
 
 - [x] git status
 - [x] git add [files]
-- [x] git rest -- [files]
+- [x] git reset -- [files]
 - [x] git commit [files]
 - [x] git log
 - [x] git reset <commit>
@@ -26,4 +26,3 @@ $ git-commander
 # License
 
 MIT
-
