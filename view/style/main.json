@@ -163,5 +163,20 @@
         "tags": true,
         "hidden": true,
         "border": "line"
+    },
+    "popup": {
+        "top": "center",
+        "left": "center",
+        "height": 3,
+        "align": "center",
+        "width": "50%",
+        "tags": true,
+        "hidden": true,
+        "border": "line",
+        "style": {
+            "border": {
+                "fg": "red"
+            }
+        }
     }
 }
