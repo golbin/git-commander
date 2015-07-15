@@ -138,6 +138,19 @@ var main = {
 
     var content = this.getItem(this.selected).content;
     this.setItem(this.selected, "   " + content.substr(3));
+  },
+
+  showPopup: function (msg) {
+    view.popup.content = "{center}" + msg + "{/center}";
+    view.popup.hidden  = false;
+    main.reload();
+
+    setTimeout(main.hidePopup, 1000);
+  },
+
+  hidePopup: function () {
+    view.popup.hidden = true;
+    main.reload();
   }
 };
 
@@ -168,6 +181,16 @@ _.each(view.list, function (elem) {
 
   // git commands
   elem.key(['C-a'], function () {
+    if (!view.list.unstaged.focused) {
+      main.showPopup("It cannot work on Staged list");
+      return;
+    }
+
+    if (git.selectedFiles('unstaged').length === 0) {
+      main.showPopup("Please select a file or files");
+      return;
+    }
+
     git.add();
     main.reload();
   });
@@ -194,6 +217,7 @@ _.each(view.list, function (elem) {
 
   elem.key(['C-d'], function () {
     if (this.getItem(this.selected) === undefined) {
+      main.showPopup("There is no diff file you selected");
       return;
     }
 
@@ -210,4 +234,3 @@ _.each(view.list, function (elem) {
 });
 
 module.exports = main;
-
