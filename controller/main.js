@@ -193,6 +193,10 @@ _.each(view.list, function (elem) {
   //elem.unkey(['C-d']);
 
   elem.key(['C-d'], function () {
+    if (this.getItem(this.selected) === undefined) {
+      return;
+    }
+
     main.show(diff);
   });
 
