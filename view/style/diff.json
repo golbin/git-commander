@@ -38,8 +38,15 @@
         "vi": true,
         "keys": true,
         "style": {
-            "item": {},
-            "selected": {}
+            "prefix": {
+                "fg": "white"
+            },
+            "item": {
+                "fg": "cyan"
+            },
+            "selected": {
+                "fg": "cyan"
+            }
         },
         "commands": {
             "EXIT": {

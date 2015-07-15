@@ -56,7 +56,7 @@ var log = {
 
       line = line + " {green-fg}(" + log.diffDate(now, item.date) + "){/green-fg}";
 
-      line = line + " {gray-fg}<" + item.author.name + ">{/gray-fg}";
+      line = line + " {cyan-fg}<" + item.author.name + ">{/cyan-fg}";
 
       formatted.push(line);
 

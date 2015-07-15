@@ -79,14 +79,21 @@
     },
     "menubar1": {
         "align": "center",
-        "bottom": 0,
-        "height": 3,
+        "bottom": 1,
+        "height": 2,
         "mouse": true,
         "vi": true,
         "keys": true,
         "style": {
-            "item": {},
-            "selected": {}
+            "prefix": {
+                "fg": "white"
+            },
+            "item": {
+                "fg": "cyan"
+            },
+            "selected": {
+                "fg": "cyan"
+            }
         },
         "commands": {
             "SELECT": {
@@ -113,14 +120,21 @@
     },
     "menubar2": {
         "align": "center",
-        "bottom": 0,
-        "height": 2,
+        "bottom": 1,
+        "height": 1,
         "mouse": true,
         "vi": true,
         "keys": true,
         "style": {
-            "item": {},
-            "selected": {}
+            "prefix": {
+                "fg": "white"
+            },
+            "item": {
+                "fg": "cyan"
+            },
+            "selected": {
+                "fg": "cyan"
+            }
         },
         "commands": {
             "ALL ": {
