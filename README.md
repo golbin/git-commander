@@ -14,6 +14,7 @@ A git tool with an easy terminal interface.
 - [x] git reset <commit>
 - [x] git diff file
 - [ ] git branch
+- [ ] git merge (handling conflict)
 - [ ] git push
 
 # Install & Usage
