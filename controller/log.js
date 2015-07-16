@@ -97,7 +97,7 @@ var log = {
 
           log.hide(true);
         } else {
-          parent.screen.render();
+          redraw();
         }
       });
     });

@@ -10,6 +10,12 @@ var editor = require('./editor'),
 // model control
 var git = new Git(__dirname);
 
+// for convenience.
+// use just call redraw() anywhere if need screen.render()
+global.redraw = function () {
+  view.screen.render();
+};
+
 var main = {
   git   : git,
   screen: view.screen,
@@ -19,7 +25,7 @@ var main = {
     view.list.unstaged.interactive = false;
     view.list.staged.select(index !== undefined ? index : view.list.unstaged.selected);
     view.list.staged.focus();
-    view.screen.render();
+    redraw();
   },
 
   moveToUnstaged: function (index) {
@@ -27,12 +33,12 @@ var main = {
     view.list.unstaged.interactive = true;
     view.list.unstaged.select(index !== undefined ? index : view.list.staged.selected);
     view.list.unstaged.focus();
-    view.screen.render();
+    redraw();
   },
 
   next: function () {
     this.move(1);
-    view.screen.render();
+    redraw();
   },
 
   // TODO: Fix crash if there is no item
@@ -47,7 +53,7 @@ var main = {
       main.mark.call(this);
     }
 
-    view.screen.render();
+    redraw();
   },
 
   selectAll: function () {
@@ -63,7 +69,7 @@ var main = {
       main.setItems(git);
     }
 
-    view.screen.render();
+    redraw();
   },
 
   lockScreen: function () {
@@ -79,13 +85,13 @@ var main = {
   show: function (controller) {
     if (_.isBoolean(controller) && controller === true) {
       main.reload();
-      view.screen.render();
+      redraw();
     } else if (_.isObject(controller)) {
       main.lockScreen();
       controller.show();
     } else {
       main.unlockScreen();
-      view.screen.render();
+      redraw();
     }
   },
 
@@ -99,7 +105,7 @@ var main = {
 
     view.loading.stop();
 
-    view.screen.render();
+    redraw();
   },
 
   // utility functions
@@ -143,14 +149,14 @@ var main = {
   showPopup: function (msg) {
     view.popup.content = "{center}" + msg + "{/center}";
     view.popup.hidden  = false;
-    main.reload();
+    redraw();
 
     setTimeout(main.hidePopup, 1000);
   },
 
   hidePopup: function () {
     view.popup.hidden = true;
-    main.reload();
+    redraw();
   }
 };
 
