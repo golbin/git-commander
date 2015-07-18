@@ -12,6 +12,8 @@
         "width": "100%",
         "height": "100%-3",
         "border": "line",
+        "tags": true,
+        "scrollable": true,
         "mouse": true,
         "vi": true,
         "keys": true,

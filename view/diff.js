@@ -13,7 +13,7 @@ var init = function (screen) {
   styles.textarea.parent = layout;
   styles.menubar.parent  = layout;
 
-  textarea = blessed.textarea(styles.textarea);
+  textarea = blessed.text(styles.textarea);
   menubar  = blessed.listbar(styles.menubar);
 
   return {

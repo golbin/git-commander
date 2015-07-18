@@ -4,14 +4,19 @@ var parent = null,
     view   = null;
 
 var diff = {
+  colorFormat: function (diffText) {
+    return diffText
+      .replace(/(^\-\s[\S\s]+?$)/gm, "{red-fg}$1{/red-fg}")
+      .replace(/(^\+\s[\S\s]+?$)/gm, "{green-fg}$1{/green-fg}")
+      .replace(/(^@@\s[\S\s]+?@@)/gm, "{cyan-fg}$1{/cyan-fg}");
+  },
   show: function () {
     var diffText = parent.git.diff(
       parent.prevFocused.name,
       parent.prevFocused.selected
     );
 
-    view.textarea.setValue(diffText);
-    view.textarea.scrollTo(0);
+    view.textarea.setContent(diff.colorFormat(diffText));
 
     view.layout.show();
     view.textarea.focus();
@@ -20,7 +25,7 @@ var diff = {
 
   hide: function (reload) {
     view.layout.hide();
-    view.textarea.clearValue();
+    view.textarea.setContent("");
     parent.show(reload);
   },
 
