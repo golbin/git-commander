@@ -162,19 +162,19 @@ var parseLogContent = function (logs, line) {
       _.last(logs).author = {
         name : line.slice(8, emailIndex - 1),
         email: line.slice(emailIndex + 1, -1)
-      }
+      };
     } else {
       _.last(logs).author = {
         name: line
-      }
+      };
     }
   } else if (line.slice(0, 4) === 'Date') {
     _.last(logs).date = new Date(line.slice(5));
   } else {
     if (!_.last(logs).messages) {
-      _.last(logs).messages = [line];
+      _.last(logs).messages = [_.trim(line)];
     } else {
-      _.last(logs).messages.push(line);
+      _.last(logs).messages.push(_.trim(line));
     }
   }
 
@@ -188,7 +188,6 @@ Git.prototype.log = function () {
 
   return _(stdout.toString().split('\n'))
     .filter(isNotEmpty)
-    .map(_.trim)
     .reduce(parseLogContent, []);
 };
 
