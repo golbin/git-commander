@@ -230,6 +230,14 @@ _.each(view.list, function (elem) {
     main.show(diff);
   });
 
+  elem.key(['tab'], function () {
+    if (view.list.staged.interactive) {
+      main.moveToUnstaged();
+    } else {
+      main.moveToStaged();
+    }
+  });
+
   elem.key(['left'], function () {
     main.moveToStaged();
   });

@@ -66,6 +66,16 @@
                 "keys": [
                     "ESC"
                 ]
+            },
+            "PAGE DOWN": {
+                "keys": [
+                    "C-f"
+                ]
+            },
+            "PAGE UP": {
+                "keys": [
+                    "C-b"
+                ]
             }
         }
     }
