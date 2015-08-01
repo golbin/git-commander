@@ -99,6 +99,8 @@ var main = {
   reload: function () {
     git.status();
 
+    view.branchbox.setText(git.getCurrentBranchName());
+
     main.setItems();
 
     main.moveToUnstaged(0);

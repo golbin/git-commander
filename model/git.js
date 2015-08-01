@@ -6,6 +6,8 @@ var gitExec = 'git';
 
 function Git (path) {
   this.path = path;
+
+  this.loadBranches();
 }
 
 Git.prototype.clear = function () {
@@ -205,6 +207,29 @@ Git.prototype.diff = function (type, index) {
   var stdout = execSync(gitCommand);
 
   return stdout.toString();
+};
+
+Git.prototype.loadBranches = function () {
+  var self = this;
+
+  var gitCommand = gitExec + ' branch --list';
+
+  var stdout = execSync(gitCommand);
+
+  this.branches = stdout.toString().split('\n')
+    .map(function (line, index) {
+      if (line.charAt(0) === '*') {
+        self.currentBranchIndex = index;
+      }
+
+      return line.slice(2);
+    });
+
+  return this.branches;
+};
+
+Git.prototype.getCurrentBranchName = function () {
+  return this.branches[this.currentBranchIndex];
 };
 
 module.exports = Git;

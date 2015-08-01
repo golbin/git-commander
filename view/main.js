@@ -7,24 +7,27 @@ var screen = blessed.screen(styles.screen);
 
 // bind screen to child elems
 _.merge(styles, {
-  title   : {
+  title    : {
     staged  : {parent: screen},
     unstaged: {parent: screen}
   },
-  list    : {
+  list     : {
     staged  : {parent: screen},
     unstaged: {parent: screen}
   },
-  menubar1: {
+  branchbox: {
     parent: screen
   },
-  menubar2: {
+  menubar1 : {
     parent: screen
   },
-  loading : {
+  menubar2 : {
     parent: screen
   },
-  popup   : {
+  loading  : {
+    parent: screen
+  },
+  popup    : {
     parent: screen
   }
 });
@@ -42,6 +45,8 @@ var list = {
 list.staged.name   = "staged";
 list.unstaged.name = "unstaged";
 
+var branchbox = blessed.text(styles.branchbox);
+
 blessed.listbar(styles.menubar1);
 blessed.listbar(styles.menubar2);
 
@@ -50,9 +55,10 @@ var loading = blessed.loading(styles.loading);
 var popup = blessed.box(styles.popup);
 
 module.exports = {
-  screen : screen,
-  title  : title,
-  list   : list,
-  loading: loading,
-  popup  : popup
+  screen   : screen,
+  title    : title,
+  list     : list,
+  branchbox: branchbox,
+  loading  : loading,
+  popup    : popup
 };

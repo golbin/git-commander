@@ -44,7 +44,7 @@
             "align": "left",
             "tags": true,
             "width": "50%",
-            "height": "100%-5",
+            "height": "100%-6",
             "interactive": false,
             "keys": true,
             "style": {
@@ -64,7 +64,7 @@
             "align": "left",
             "tags": true,
             "width": "50%",
-            "height": "100%-5",
+            "height": "100%-6",
             "interactive": true,
             "keys": true,
             "style": {
@@ -75,6 +75,18 @@
                     "bg": "blue"
                 }
             }
+        }
+    },
+    "branchbox": {
+        "align": "center",
+        "bottom": 3,
+        "height": 1,
+        "align": "right",
+        "padding": {
+            "right": 2
+        },
+        "style": {
+            "fg": "yellow"
         }
     },
     "menubar1": {
