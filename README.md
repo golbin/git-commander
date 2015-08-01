@@ -2,7 +2,7 @@
 
 A git tool with an easy terminal interface.
 
-![ScreenShot](https://raw.githubusercontent.com/golbin/git-commander/master/doc/git-commander.gif)
+![ScreenShot](https://raw.githubusercontent.com/golbin/git-commander/master/doc/git-commander@2x.gif)
 
 # Features
 
@@ -13,7 +13,7 @@ A git tool with an easy terminal interface.
 - [x] git log
 - [x] git reset <commit>
 - [x] git diff file
-- [ ] git branch
+- [x] git branch
 - [ ] git merge (handling conflict)
 - [ ] git pull/push
 
