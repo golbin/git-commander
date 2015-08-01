@@ -3,7 +3,8 @@ var blessed = require('blessed'),
 
 var layout  = null,
     list    = null,
-    menubar = null;
+    menubar = null,
+    prompt  = null;
 
 var init = function (screen) {
   styles.layout.parent = screen;
@@ -16,10 +17,14 @@ var init = function (screen) {
   list    = blessed.list(styles.list);
   menubar = blessed.listbar(styles.menubar);
 
+  styles.prompt.parent  = list;
+  prompt  = blessed.prompt(styles.prompt);
+
   return {
     layout : layout,
     list   : list,
-    menubar: menubar
+    menubar: menubar,
+    prompt : prompt
   };
 };
 

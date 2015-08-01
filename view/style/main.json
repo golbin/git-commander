@@ -78,7 +78,6 @@
         }
     },
     "branchbox": {
-        "align": "center",
         "bottom": 3,
         "height": 1,
         "align": "right",

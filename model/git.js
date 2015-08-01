@@ -253,4 +253,12 @@ Git.prototype.delBranch = function (branchIndex) {
   return this.currentBranchIndex;
 };
 
+Git.prototype.addBranch = function (branchName) {
+  var gitCommand = gitExec + ' branch ' + _.trim(branchName);
+
+  var stdout = execSync(gitCommand, {stdio: [0, 'pipe', 'pipe']});
+
+  return branchName;
+};
+
 module.exports = Git;

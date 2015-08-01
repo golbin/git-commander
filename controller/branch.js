@@ -56,12 +56,23 @@ var branch = {
       }
     });
 
+    view.list.key(['C-a'], function () {
+      view.prompt.input('Input a branch name', '', function (err, value) {
+        try {
+          parent.git.addBranch(value);
+          branch.show();
+        } catch (e) {
+          branch.hide(true);
+          parent.showPopup(_.trim(e.stderr.toString()), 3);
+        }
+      });
+    });
+
     view.list.key(['escape'], function () {
       branch.hide();
     });
   }
 };
-
 
 module.exports = branch;
 

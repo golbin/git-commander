@@ -62,5 +62,15 @@
                 ]
             }
         }
+    },
+    "prompt": {
+        "top": "center",
+        "left": "center",
+        "width": "50%",
+        "height": "shrink",
+        "border": "line",
+        "align": "left",
+        "vi": true,
+        "keys": true
     }
 }
