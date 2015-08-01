@@ -46,6 +46,16 @@ var branch = {
       }
     });
 
+    view.list.key(['C-d'], function () {
+      try {
+        parent.git.delBranch(this.selected);
+        branch.show();
+      } catch (e) {
+        branch.hide(true);
+        parent.showPopup(_.trim(e.stderr.toString()), 3);
+      }
+    });
+
     view.list.key(['escape'], function () {
       branch.hide();
     });

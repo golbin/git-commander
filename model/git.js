@@ -243,4 +243,14 @@ Git.prototype.checkout = function (branchIndex) {
   return this.currentBranchIndex;
 };
 
+Git.prototype.delBranch = function (branchIndex) {
+  var gitCommand = gitExec + ' branch -d ' + this.branches[branchIndex];
+
+  var stdout = execSync(gitCommand, {stdio: [0, 'pipe', 'pipe']});
+
+  this.currentBranchIndex = branchIndex;
+
+  return this.currentBranchIndex;
+};
+
 module.exports = Git;
