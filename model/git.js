@@ -216,7 +216,7 @@ Git.prototype.loadBranches = function () {
 
   var stdout = execSync(gitCommand);
 
-  this.branches = stdout.toString().split('\n')
+  this.branches = _.trim(stdout.toString()).split('\n')
     .map(function (line, index) {
       if (line.charAt(0) === '*') {
         self.currentBranchIndex = index;
@@ -230,6 +230,16 @@ Git.prototype.loadBranches = function () {
 
 Git.prototype.getCurrentBranchName = function () {
   return this.branches[this.currentBranchIndex];
+};
+
+Git.prototype.checkout = function (branchIndex) {
+  var gitCommand = gitExec + ' checkout ' + this.branches[branchIndex];
+
+  var stdout = execSync(gitCommand, {stdio: [0, 1, 'pipe']});
+
+  this.currentBranchIndex = branchIndex;
+
+  return this.currentBranchIndex;
 };
 
 module.exports = Git;

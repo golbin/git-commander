@@ -52,7 +52,7 @@ blessed.listbar(styles.menubar2);
 
 var loading = blessed.loading(styles.loading);
 
-var popup = blessed.box(styles.popup);
+var popup = blessed.text(styles.popup);
 
 module.exports = {
   screen   : screen,

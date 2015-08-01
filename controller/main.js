@@ -4,6 +4,7 @@ var Git  = require('../model/git'),
     view = require('../view/main');
 
 var editor = require('./editor'),
+    branch = require('./branch'),
     log    = require('./log'),
     diff   = require('./diff');
 
@@ -148,12 +149,12 @@ var main = {
     this.setItem(this.selected, "   " + content.substr(3));
   },
 
-  showPopup: function (msg) {
-    view.popup.content = "{center}" + msg + "{/center}";
+  showPopup: function (msg, hideAfter) {
+    view.popup.content = msg;
     view.popup.hidden  = false;
     redraw();
 
-    setTimeout(main.hidePopup, 1000);
+    setTimeout(main.hidePopup, hideAfter ? hideAfter : 1000);
   },
 
   hidePopup: function () {
@@ -170,6 +171,9 @@ log.init(main);
 
 // bind diff viewer
 diff.init(main);
+
+// bind branch viewer
+branch.init(main);
 
 // bind keys
 // TODO: Need to refactor
@@ -221,8 +225,6 @@ _.each(view.list, function (elem) {
     main.show(log);
   });
 
-  //elem.unkey(['C-d']);
-
   elem.key(['C-d'], function () {
     if (this.getItem(this.selected) === undefined) {
       main.showPopup("There is no diff file you selected");
@@ -230,6 +232,10 @@ _.each(view.list, function (elem) {
     }
 
     main.show(diff);
+  });
+
+  elem.key(['C-b'], function () {
+    main.show(branch);
   });
 
   elem.key(['tab'], function () {

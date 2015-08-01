@@ -159,9 +159,14 @@
                     "C-l"
                 ]
             },
-            "DIFF": {
+            "DIFF ": {
                 "keys": [
                     "C-d"
+                ]
+            },
+            "BRANCH": {
+                "keys": [
+                    "C-b"
                 ]
             }
         }
@@ -169,8 +174,8 @@
     "loading": {
         "top": "center",
         "left": "center",
-        "height": 5,
         "align": "center",
+        "height": 5,
         "width": "50%",
         "tags": true,
         "hidden": true,
@@ -179,12 +184,18 @@
     "popup": {
         "top": "center",
         "left": "center",
-        "height": 3,
-        "align": "center",
-        "width": "50%",
+        "align": "left",
+        "height": "shrink",
+        "width": "shrink",
         "tags": true,
         "hidden": true,
         "border": "line",
+        "padding": {
+            "top": 1,
+            "bottom": 1,
+            "left": 3,
+            "right": 3
+        },
         "style": {
             "border": {
                 "fg": "red"
