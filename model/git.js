@@ -220,9 +220,10 @@ Git.prototype.loadBranches = function () {
     .map(function (line, index) {
       if (line.charAt(0) === '*') {
         self.currentBranchIndex = index;
+        return _.trim(line.slice(2));
+      } else {
+        return _.trim(line);
       }
-
-      return line.slice(2);
     });
 
   return this.branches;
@@ -235,7 +236,7 @@ Git.prototype.getCurrentBranchName = function () {
 Git.prototype.checkout = function (branchIndex) {
   var gitCommand = gitExec + ' checkout ' + this.branches[branchIndex];
 
-  var stdout = execSync(gitCommand, {stdio: [0, 1, 'pipe']});
+  var stdout = execSync(gitCommand, {stdio: [0, 'pipe', 'pipe']});
 
   this.currentBranchIndex = branchIndex;
 
