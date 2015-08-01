@@ -57,7 +57,7 @@ var branch = {
     });
 
     view.list.key(['C-a'], function () {
-      view.prompt.input('Input a branch name', '', function (err, value) {
+      view.prompt.input('Input the new branch name', '', function (err, value) {
         try {
           parent.git.addBranch(value);
           branch.show();

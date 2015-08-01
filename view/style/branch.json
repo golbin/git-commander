@@ -66,7 +66,7 @@
     "prompt": {
         "top": "center",
         "left": "center",
-        "width": "50%",
+        "width": "80%",
         "height": "shrink",
         "border": "line",
         "align": "left",
