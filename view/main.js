@@ -45,7 +45,7 @@ var list = {
 list.staged.name   = "staged";
 list.unstaged.name = "unstaged";
 
-var branchbox = blessed.text(styles.branchbox);
+var branchbox = blessed.box(styles.branchbox);
 
 blessed.listbar(styles.menubar1);
 blessed.listbar(styles.menubar2);

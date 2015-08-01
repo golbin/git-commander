@@ -80,6 +80,7 @@
     "branchbox": {
         "bottom": 3,
         "height": 1,
+        "width": "100%",
         "align": "right",
         "padding": {
             "right": 2
