@@ -1,6 +1,7 @@
 var _       = require('lodash'),
     blessed = require('blessed'),
-    styles  = require('./style/main.json');
+    config = require('../config'),
+    styles  = require('./style/main')(config);
 
 // build layout
 var screen = blessed.screen(styles.screen);

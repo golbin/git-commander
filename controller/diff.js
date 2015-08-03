@@ -3,6 +3,8 @@ var DiffView = require('../view/diff');
 var parent = null,
     view   = null;
 
+var config = require('../config');
+
 var diff = {
   colorFormat: function (diffText) {
     return diffText
@@ -34,8 +36,18 @@ var diff = {
 
     view = DiffView(parent.screen);
 
-    view.textarea.key(['escape', 'q'], function () {
-      diff.hide();
+    view.textarea.key(config.keys.common.quit, function () {
+        diff.hide();
+    });
+
+    view.textarea.key(config.keys.common.pageUp, function () {
+      view.textarea.scroll(-view.textarea.height || -1);
+      redraw();
+    });
+
+    view.textarea.key(config.keys.common.pageDown, function () {
+      view.textarea.scroll(view.textarea.height || 1);
+      redraw();
     });
   }
 };
