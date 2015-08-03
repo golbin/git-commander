@@ -214,7 +214,7 @@ _.each(view.list, function (elem) {
 
   elem.key(['C-c'], function () {
     if (git.getStagedFiles().length < 1) {
-      // TODO: alert
+      main.showPopup("You need to stage files first");
       return;
     }
 
