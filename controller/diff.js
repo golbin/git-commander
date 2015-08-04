@@ -1,9 +1,8 @@
 var DiffView = require('../view/diff');
+var config = require('../config');
 
 var parent = null,
     view   = null;
-
-var config = require('../config');
 
 var diff = {
   colorFormat: function (diffText) {
