@@ -1,4 +1,5 @@
 var EditorView = require('../view/editor');
+var config = require('../config');
 
 var parent = null,
     view   = null;
@@ -22,7 +23,7 @@ var editor = {
 
     view = EditorView(parent.screen);
 
-    view.textarea.key(['C-s'], function () {
+    view.textarea.key(config.keys.editor.save, function () {
       var message = view.textarea.getValue();
 
       parent.git.commit(message);
@@ -30,7 +31,7 @@ var editor = {
       editor.hide(true);
     });
 
-    view.textarea.key(['escape'], function () {
+    view.textarea.key(config.keys.main.quit, function () {
       editor.hide();
     });
   }

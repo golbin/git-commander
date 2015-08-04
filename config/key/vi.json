@@ -50,6 +50,11 @@
             "right"
         ]
     },
+    "editor": {
+        "save": [
+            "C-s"
+        ]
+    },
     "branch": {
         "checkOut": [
             "enter"

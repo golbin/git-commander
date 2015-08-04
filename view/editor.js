@@ -1,5 +1,6 @@
 var blessed = require('blessed'),
-    styles  = require('./style/editor.json');
+    config = require('../config'),
+    styles  = require('./style/editor')(config);
 
 var layout   = null,
     textarea = null,
