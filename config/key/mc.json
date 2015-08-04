@@ -49,5 +49,16 @@
         "rightPane": [
             "right"
         ]
+    },
+    "branch": {
+        "checkOut": [
+            "enter"
+        ],
+        "delete": [
+            "d"
+        ],
+        "add": [
+            "a"
+        ]
     }
 }

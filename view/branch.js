@@ -1,5 +1,6 @@
 var blessed = require('blessed'),
-    styles  = require('./style/branch.json');
+    config = require('../config'),
+    styles  = require('./style/branch')(config);
 
 var layout  = null,
     list    = null,
