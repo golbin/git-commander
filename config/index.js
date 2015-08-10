@@ -1,13 +1,15 @@
+var _ = require('lodash');
+
 var defaultConfig = {
-    keys: 'vi'
+    keySet: 'vi'
 };
 
 var config = (function() {
-    var fs = require('fs'),
-        _ = require('lodash');
+    var fs = require('fs');
 
     var retval = defaultConfig;
-    var configFileName = process.env.GIT_COMMANDER_CONFIG;
+    var userHome = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+    var configFileName = userHome + '/.config/git-commander/config.json';
 
     if (configFileName && fs.existsSync(configFileName)) {
         retval = _.extend({}, defaultConfig, JSON.parse(fs.readFileSync(configFileName)));
@@ -16,8 +18,9 @@ var config = (function() {
     return retval;
 }());
 
-var keyConfig = require('./key/' + config.keys + '.json');
+
+var keyConfig = require('./key/' + config.keySet + '.json');
 
 module.exports = {
-    keys: keyConfig
+    keys: config.keys ? _.merge({}, keyConfig, config.keys) : keyConfig
 };
