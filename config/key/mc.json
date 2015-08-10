@@ -18,10 +18,6 @@
         "selectAll": [
             "enter"
         ],
-        "quit": [
-            "escape",
-            "q"
-        ],
         "add": [
             "a"
         ],

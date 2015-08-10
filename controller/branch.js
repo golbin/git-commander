@@ -69,7 +69,7 @@ var branch = {
       });
     });
 
-    view.list.key(config.keys.main.quit, function () {
+    view.list.key(config.keys.common.quit, function () {
       branch.hide();
     });
   }

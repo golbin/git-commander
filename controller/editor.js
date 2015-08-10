@@ -31,7 +31,7 @@ var editor = {
       editor.hide(true);
     });
 
-    view.textarea.key(config.keys.main.quit, function () {
+    view.textarea.key(config.keys.common.quit, function () {
       editor.hide();
     });
   }

@@ -189,7 +189,7 @@ _.each(view.list, function (elem) {
     main.selectAll();
   });
 
-  elem.key(config.keys.main.quit, function () {
+  elem.key(config.keys.common.quit, function () {
     return process.exit(0);
   });
 
