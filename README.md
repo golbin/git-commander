@@ -31,15 +31,6 @@ $ git-commander
 - **blessed** >= 0.1.7
 - **lodash** >= 3.0
 
-# Tips
-
-If you use non-ascii character for source files, You need to disable
-the **core.quotepath** option using following command:
-
-```bash
-$ git config --global core.quotepath false
-```
-
 # Key Configuration
 
 We have two key sets _vi_ and _mc_ preconfigured. The default one is _vi_.
@@ -72,6 +63,30 @@ You also can redefine keys one by one if you would like. You'll need to extend y
 ```
 
 You can find [default settings here](https://github.com/golbin/git-commander/tree/master/config/key).
+
+# Troubleshootings
+
+## ANSI color codes are displayed
+
+ANSI color codes are being displayed if you set "always" for color settings in your **.gitconfig**. For fixing this, set "auto" for color settings like below.
+
+```
+[color]
+    # diff = always
+    diff = auto
+    status = auto
+    ui = auto
+    branch = auto
+```
+
+## Non-ascii character problem
+
+If you use non-ascii character for source files, You need to disable
+the **core.quotepath** option using following command:
+
+```bash
+$ git config --global core.quotepath false
+```
 
 # License
 
