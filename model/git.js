@@ -69,7 +69,9 @@ Git.prototype.status = function () {
 
   this.clear();
 
-  var stdout = execSync('git status -su');
+  var gitCommand = gitExec + ' status -su';
+
+  var stdout = execSync(gitCommand);
 
   return self.convertStatus(stdout.toString());
 };
