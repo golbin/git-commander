@@ -1,0 +1,65 @@
+{
+    "common": {
+        "quit": [
+            "escape",
+            "q"
+        ],
+        "pageUp": [
+            "C-b"
+        ],
+        "pageDown": [
+            "C-f"
+        ]
+    },
+    "main": {
+        "select": [
+            "space"
+        ],
+        "selectAll": [
+            "enter"
+        ],
+        "add": [
+            "C-a"
+        ],
+        "reset": [
+            "C-r"
+        ],
+        "commit": [
+            "C-c"
+        ],
+        "log": [
+            "C-l"
+        ],
+        "diff": [
+            "C-d"
+        ],
+        "showBranch": [
+            "C-b"
+        ],
+        "togglePanes": [
+            "tab"
+        ],
+        "leftPane": [
+            "left"
+        ],
+        "rightPane": [
+            "right"
+        ]
+    },
+    "editor": {
+        "save": [
+            "C-s"
+        ]
+    },
+    "branch": {
+        "checkOut": [
+            "enter"
+        ],
+        "delete": [
+            "C-d"
+        ],
+        "add": [
+            "C-a"
+        ]
+    }
+}

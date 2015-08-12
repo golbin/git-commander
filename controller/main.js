@@ -8,6 +8,8 @@ var editor = require('./editor'),
     log    = require('./log'),
     diff   = require('./diff');
 
+var config = require('../config');
+
 // model control
 var git = new Git(__dirname);
 
@@ -178,21 +180,31 @@ branch.init(main);
 // bind keys
 // TODO: Need to refactor
 _.each(view.list, function (elem) {
-  elem.key(['space'], function () {
+  elem.key(config.keys.main.select, function () {
     main.toggle.call(this);
     main.next.call(this);
   });
 
-  elem.key(['enter'], function () {
+  elem.key(config.keys.main.selectAll, function () {
     main.selectAll();
   });
 
-  elem.key(['escape', 'q'], function () {
+  elem.key(config.keys.common.quit, function () {
     return process.exit(0);
   });
 
+  elem.key(config.keys.common.pageUp, function () {
+    elem.move(-(elem.height - elem.iheight));
+    redraw();
+  });
+
+  elem.key(config.keys.common.pageDown, function () {
+    elem.move(elem.height - elem.iheight);
+    redraw();
+  });
+
   // git commands
-  elem.key(['C-a'], function () {
+  elem.key(config.keys.main.add, function () {
     if (!view.list.unstaged.focused) {
       main.showPopup("It cannot work on Staged list");
       return;
@@ -207,25 +219,25 @@ _.each(view.list, function (elem) {
     main.reload();
   });
 
-  elem.key(['C-r'], function () {
+  elem.key(config.keys.main.reset, function () {
     git.reset();
     main.reload();
   });
 
-  elem.key(['C-c'], function () {
+  elem.key(config.keys.main.commit, function () {
     if (git.getStagedFiles().length < 1) {
-      // TODO: alert
+      main.showPopup("You need to stage files first");
       return;
     }
 
     main.show(editor);
   });
 
-  elem.key(['C-l'], function () {
+  elem.key(config.keys.main.log, function () {
     main.show(log);
   });
 
-  elem.key(['C-d'], function () {
+  elem.key(config.keys.main.diff, function () {
     if (this.getItem(this.selected) === undefined) {
       main.showPopup("There is no diff file you selected");
       return;
@@ -234,11 +246,11 @@ _.each(view.list, function (elem) {
     main.show(diff);
   });
 
-  elem.key(['C-b'], function () {
+  elem.key(config.keys.main.showBranch, function () {
     main.show(branch);
   });
 
-  elem.key(['tab'], function () {
+  elem.key(config.keys.main.togglePanes, function () {
     if (view.list.staged.interactive) {
       main.moveToUnstaged();
     } else {
@@ -246,11 +258,11 @@ _.each(view.list, function (elem) {
     }
   });
 
-  elem.key(['left'], function () {
+  elem.key(config.keys.main.leftPane, function () {
     main.moveToStaged();
   });
 
-  elem.key(['right'], function () {
+  elem.key(config.keys.main.leftPane, function () {
     main.moveToUnstaged();
   });
 });

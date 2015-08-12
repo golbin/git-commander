@@ -1,5 +1,6 @@
 var blessed = require('blessed'),
-    styles  = require('./style/diff.json');
+    config = require('../config'),
+    styles  = require('./style/diff')(config);
 
 var layout   = null,
     textarea = null,

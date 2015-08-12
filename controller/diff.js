@@ -1,4 +1,5 @@
 var DiffView = require('../view/diff');
+var config = require('../config');
 
 var parent = null,
     view   = null;
@@ -6,9 +7,9 @@ var parent = null,
 var diff = {
   colorFormat: function (diffText) {
     return diffText
-      .replace(/(^\-\s[\S\s]+?$)/gm, "{red-fg}$1{/red-fg}")
-      .replace(/(^\+\s[\S\s]+?$)/gm, "{green-fg}$1{/green-fg}")
-      .replace(/(^@@\s[\S\s]+?@@)/gm, "{cyan-fg}$1{/cyan-fg}");
+      .replace(/(^\-.*$)/gm, "{red-fg}$1{/red-fg}")
+      .replace(/(^\+.*$)/gm, "{green-fg}$1{/green-fg}")
+      .replace(/(^@@.*$)/gm, "{cyan-fg}$1{/cyan-fg}");
   },
   show: function () {
     var diffText = parent.git.diff(
@@ -34,8 +35,18 @@ var diff = {
 
     view = DiffView(parent.screen);
 
-    view.textarea.key(['escape', 'q'], function () {
-      diff.hide();
+    view.textarea.key(config.keys.common.quit, function () {
+        diff.hide();
+    });
+
+    view.textarea.key(config.keys.common.pageUp, function () {
+      view.textarea.scroll(-view.textarea.height || -1);
+      redraw();
+    });
+
+    view.textarea.key(config.keys.common.pageDown, function () {
+      view.textarea.scroll(view.textarea.height || 1);
+      redraw();
     });
   }
 };

@@ -1,5 +1,6 @@
 var blessed = require('blessed'),
-    styles  = require('./style/log.json');
+    config = require('../config'),
+    styles  = require('./style/log')(config);
 
 var layout  = null,
     list    = null,

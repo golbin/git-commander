@@ -1,6 +1,7 @@
 var _ = require('lodash');
 
 var BranchView = require('../view/branch');
+var config = require('../config');
 
 var parent = null,
     view   = null;
@@ -36,7 +37,7 @@ var branch = {
 
     view = BranchView(parent.screen);
 
-    view.list.key(['enter'], function () {
+    view.list.key(config.keys.branch.checkOut, function () {
       try {
         parent.git.checkout(this.selected);
         branch.hide(true);
@@ -46,7 +47,7 @@ var branch = {
       }
     });
 
-    view.list.key(['C-d'], function () {
+    view.list.key(config.keys.branch.delete, function () {
       try {
         parent.git.delBranch(this.selected);
         branch.show();
@@ -56,7 +57,7 @@ var branch = {
       }
     });
 
-    view.list.key(['C-a'], function () {
+    view.list.key(config.keys.branch.add, function () {
       view.prompt.input('Input the new branch name', '', function (err, value) {
         try {
           parent.git.addBranch(value);
@@ -68,7 +69,7 @@ var branch = {
       });
     });
 
-    view.list.key(['escape'], function () {
+    view.list.key(config.keys.common.quit, function () {
       branch.hide();
     });
   }

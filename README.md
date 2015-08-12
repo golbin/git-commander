@@ -40,6 +40,39 @@ the **core.quotepath** option using following command:
 $ git config --global core.quotepath false
 ```
 
+# Key Configuration
+
+We have two key sets _vi_ and _mc_ preconfigured. The default one is _vi_.
+
+##### Using the mc key set
+
+You will need to place a file at `~/.config/git-commander/config.json` with the following content:
+
+```
+{
+    "keySet": "mc"
+}
+```
+
+##### Redefining keys one by one
+
+You also can redefine keys one by one if you would like. You'll need to extend your `~/.config/git-commander/config.json` file with a key called `keys` and put all your key definitions there. For example if you would like to use the _mc_ key set and make key _x_ quit the application, you'll need to add the following:
+
+```
+{
+    "keySet": "mc",
+    "keys": {
+        "common": {
+            "quit": [
+                "x"
+            ]
+        }
+    }
+}
+```
+
+You can find [default settings here](https://github.com/golbin/git-commander/tree/master/config/key).
+
 # License
 
 MIT

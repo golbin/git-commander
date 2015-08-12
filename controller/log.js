@@ -1,4 +1,5 @@
 var LogView = require('../view/log');
+var config = require('../config');
 
 var parent = null,
     view   = null;
@@ -88,7 +89,7 @@ var log = {
 
     view = LogView(parent.screen);
 
-    view.list.key(['C-r'], function () {
+    view.list.key(config.keys.main.reset, function () {
       var item = logItems[view.list.selected];
 
       view.confirm.ask("Are you sure to reset? (Y/N)\n", function (err, value) {
@@ -102,13 +103,24 @@ var log = {
       });
     });
 
-    view.list.key(['escape', 'q'], function () {
+    view.list.key(config.keys.common.quit, function () {
       log.hide();
     });
 
-    view.confirm.key(['escape'], function () {
+    view.list.key(config.keys.common.pageUp, function () {
+      view.list.scroll(-view.list.height || -1);
+      redraw();
+    });
+
+    view.list.key(config.keys.common.pageDown, function () {
+      view.list.scroll(view.list.height || 1);
+      redraw();
+    });
+
+    view.confirm.key(config.keys.common.quit, function () {
       view.confirm.hide();
     });
+
   }
 };
 
