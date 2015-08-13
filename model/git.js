@@ -1,11 +1,14 @@
 var _        = require('lodash'),
+    path     = require('path'),
     execSync = require('child_process').execSync;
 
 // TODO: get git command from shell
 var gitExec = 'git';
 
-function Git (path) {
-  this.path = path;
+function Git (repoPath) {
+  this.repoPath = repoPath;
+
+  this.projectName = repoPath.split(path.sep).pop();
 
   this.loadBranches();
 }
@@ -27,15 +30,15 @@ Git.prototype.clear = function () {
   };
 };
 
-Git.prototype.setStatus = function (code, path) {
+Git.prototype.setStatus = function (code, filePath) {
   if (code.charAt(0) !== '?' && code.charAt(0) !== ' ') {
-    this.files.staged.push(path);
+    this.files.staged.push(filePath);
     this.selected.staged.push(false);
     this.symbols.staged.push(code.charAt(0));
   }
 
   if (code.charAt(1) !== ' ') {
-    this.files.unstaged.push(path);
+    this.files.unstaged.push(filePath);
     this.selected.unstaged.push(false);
     this.symbols.unstaged.push(code.charAt(1));
   }
@@ -233,6 +236,10 @@ Git.prototype.loadBranches = function () {
 
 Git.prototype.getCurrentBranchName = function () {
   return this.branches[this.currentBranchIndex];
+};
+
+Git.prototype.getCurrentProjectName = function () {
+  return this.projectName;
 };
 
 Git.prototype.checkout = function (branchIndex) {

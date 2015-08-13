@@ -11,7 +11,7 @@ var editor = require('./editor'),
 var config = require('../config');
 
 // model control
-var git = new Git(__dirname);
+var git = new Git(process.cwd());
 
 // for convenience.
 // use just call redraw() anywhere if need screen.render()
@@ -98,11 +98,19 @@ var main = {
     }
   },
 
+  setBranchLine: function () {
+    var branchLine =
+      "{blue-fg}" + git.getCurrentProjectName() + ":{/blue-fg}" +
+      "{yellow-fg}" + git.getCurrentBranchName() + "{/yellow-fg}";
+
+    view.branchbox.setContent(branchLine);
+  },
+
   // initialize
   reload: function () {
     git.status();
 
-    view.branchbox.setText(git.getCurrentBranchName());
+    main.setBranchLine();
 
     main.setItems();
 

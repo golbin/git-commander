@@ -85,11 +85,9 @@ module.exports = function (config) {
             "height": 1,
             "width": "100%",
             "align": "right",
+            "tags": true,
             "padding": {
                 "right": 2
-            },
-            "style": {
-                "fg": "yellow"
             }
         },
         "menubar1": {
